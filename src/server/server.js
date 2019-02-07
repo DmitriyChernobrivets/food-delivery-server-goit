@@ -9,10 +9,12 @@ const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const app = express();
 
 const server = port => {
-  app.get("/", defaultRote);
-  app.get("/products", productRoute);
-  app.post("/register", urlencodedParser, usersRoute);
-  app.listen(port);
+  app
+    .use(urlencodedParser)
+    .get("/", defaultRote)
+    .get("/products", productRoute)
+    .post("/register", usersRoute)
+    .listen(port);
 };
 
 module.exports = server;
