@@ -5,8 +5,8 @@ const dbDirectory = path.join(__dirname, "../db/");
 const register = (req, res) => {
   if (!req.body) return res.sendStatus(400);
   const user = JSON.parse(req.body.user); // {}
-  const userName = user.username;
-  const dbFileDirectory = dbDirectory + userName;
+  const { username } = user;
+  const dbFileDirectory = dbDirectory + username;
   const responseBody = {
     status: "success",
     user
