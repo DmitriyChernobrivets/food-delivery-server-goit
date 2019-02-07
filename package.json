@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/index.js",
+    "debug": "node --inspect index.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/DmitriyChernobrivets/food-delivery-server-goit/issues"
   },
-  "homepage": "https://github.com/DmitriyChernobrivets/food-delivery-server-goit#readme"
+  "homepage": "https://github.com/DmitriyChernobrivets/food-delivery-server-goit#readme",
+  "dependencies": {
+    "express": "^4.16.4",
+    "morgan": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
 }
