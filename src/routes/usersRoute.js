@@ -2,9 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const dbDirectory = path.join(__dirname, "../db/");
 
-const register = (req, res) => {
+const users = (req, res) => {
   if (!req.body) return res.sendStatus(400);
-  const user = req.body.user; // {}
+  const user = req.body.key; // {}
   const userName = JSON.parse(user).username;
   const dbFileDirectory = dbDirectory + userName;
   const responseBody = {
@@ -17,4 +17,4 @@ const register = (req, res) => {
   res.end();
 };
 
-module.exports = register;
+module.exports = users;
