@@ -1,4 +1,4 @@
-const { products, users, categories } = require("./keysVariables");
+const { products, users, categories } = require("./constants");
 
 module.exports = {
   "/products": products,

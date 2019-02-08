@@ -1,20 +1,12 @@
-const uuidv4 = require("uuid/v4");
-const fs = require("fs");
-const path = require("path");
-
+const writeFileToDb = require("../helpers/writeInDb");
+const responseBody = require("../helpers/responseBody");
 const categoriesRoute = (req, res) => {
-  const id = uuidv4();
-  const category = JSON.parse(req.body.key); // {}
-  const directoryPath = path.join(__dirname, "../db/", "categories/");
+  if (!req.body) return res.sendStatus(400);
+  const writedData = writeFileToDb(req);
+  const response = responseBody("success", "category", writedData); // {}
 
-  const addingIdCategory = {
-    id,
-    ...category
-  };
-  fs.writeFile(
-    directoryPath + `category-${addingIdCategory.name}.json`,
-    JSON.stringify(addingIdCategory)
-  );
+  res.writeHead(201, { "Content-Type": "application/json" });
+  res.write(JSON.stringify(response));
   res.end();
 };
 
