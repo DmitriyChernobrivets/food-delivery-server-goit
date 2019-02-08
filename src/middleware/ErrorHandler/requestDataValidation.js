@@ -1,7 +1,7 @@
 const validationRouter = require("./validationRouter");
 
-const requestDataValidation = (req, res, next) => {
-  if (!req.body.key) return res.end();
+const requestDataValidation = (err, req, res, next) => {
+  if (!req.body.key || err) return res.status(500).send("Something broke!");
   const validKeys = validationRouter[req.path];
 
   const key = JSON.parse(req.body.key);
