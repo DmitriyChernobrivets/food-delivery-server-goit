@@ -1,18 +1,23 @@
 const fs = require("fs");
 const path = require("path");
-const dbDirectory = path.join(__dirname, "../db/users/");
+const errorHandler = require("../Errors/errorHanlder");
 
 const register = (req, res) => {
   if (!req.body) return res.sendStatus(400);
   const user = JSON.parse(req.body.user); // {}
   const { username } = user;
-  const dbFileDirectory = dbDirectory + username;
+  const dbFileDirectory = path.join(
+    __dirname,
+    "../db/users/",
+    `${username}.json`
+  );
+
   const responseBody = {
     status: "success",
     user
   };
 
-  fs.writeFile(`${dbFileDirectory}.json`, JSON.stringify(user));
+  fs.writeFile(dbFileDirectory, JSON.stringify(user), errorHandler);
   res.writeHead(200, { "Content-Type": "application/json" });
   res.write(`<h1>${JSON.stringify(responseBody)}</h1>`);
   res.end();
