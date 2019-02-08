@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-const dbDirectory = path.join(__dirname, "../db/");
+const dbDirectory = path.join(__dirname, "../db/users/");
 
 const register = (req, res) => {
   if (!req.body) return res.sendStatus(400);
