@@ -1,0 +1,11 @@
+{
+  "users": [
+    {
+      "id": "e747cede-10f5-40cf-a900-6fe1dd1fd5a7",
+      "username": "Ivan",
+      "telephone": "063 777 77 77",
+      "password": "12345",
+      "email": "ivan@gmail.com"
+    }
+  ]
+}

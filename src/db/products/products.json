@@ -1,0 +1,20 @@
+{
+  "products": [
+    {
+      "id": "ddc991e7-fee5-433d-8011-cc497cfe2292",
+      "name": "ХАТА",
+      "description": "Хорошая квартира в центре города",
+      "price": "20000",
+      "currency": "USD",
+      "categories": ["house", "rent"]
+    },
+    {
+      "id": "68eeae0d-fab2-4525-bb6b-4395c992da00",
+      "name": "Комната",
+      "description": "Хорошая квартира в центре города",
+      "price": "20000",
+      "currency": "USD",
+      "categories": ["house", "rent"]
+    }
+  ]
+}
