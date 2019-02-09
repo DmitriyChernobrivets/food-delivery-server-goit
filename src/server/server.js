@@ -11,6 +11,7 @@ const app = express();
 const server = port => {
   app
     .use(urlencodedParser)
+    .use(bodyParser.json())
     .get("/", defaultRote)
     .get("/products", productRoute)
     .post("/register", usersRoute)

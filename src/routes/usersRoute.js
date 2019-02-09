@@ -4,8 +4,10 @@ const errorHandler = require("../Errors/errorHanlder");
 
 const register = (req, res) => {
   if (!req.body) return res.sendStatus(400);
-  const user = JSON.parse(req.body.user); // {}
+  const user = req.body; // {}
   const { username } = user;
+
+
   const dbFileDirectory = path.join(
     __dirname,
     "../db/users/",
