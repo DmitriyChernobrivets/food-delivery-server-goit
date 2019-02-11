@@ -1,9 +1,14 @@
-const allproducts = require("../db/products.json");
+const DB = require('../services/dateBase');
+const { responseSuccess, responseFailed } = require('../services/responseBody')
+const db = new DB();
+
 
 const productroute = (req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.write(JSON.stringify(allproducts));
-  res.end();
+  db.readDb()
+  .then(db => responseSuccess(db, res))
+  .catch((err) => responseFailed(err, res))
+  
+
 };
 
 module.exports = productroute;
