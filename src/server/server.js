@@ -6,7 +6,8 @@ const usersRoute = require("../routes/usersRoute");
 const getByID = require("../routes/getProductByID");
 const queryRoute = require('../routes/querysRoute');
 const bodyParser = require("body-parser");
-var https = require('https');
+const options = require('../ssl/options');
+const https = require('https');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 
 const app = express();

@@ -1,7 +1,7 @@
 const fs = require('fs');
 
-const privateKey  = fs.readFileSync('./src/ssl2/server.key');
-const certificate = fs.readFileSync('./src/ssl2/server.crt');
+const privateKey  = fs.readFileSync('./src/ssl/server.key');
+const certificate = fs.readFileSync('./src/ssl/server.crt');
 
 const options = {
    key: privateKey,
