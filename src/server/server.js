@@ -8,7 +8,7 @@ const queryRoute = require('../routes/querysRoute');
 const bodyParser = require("body-parser");
 var https = require('https');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
-const options = require('../ssl2/options');
+
 const app = express();
 
 
