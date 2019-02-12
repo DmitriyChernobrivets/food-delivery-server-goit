@@ -1,24 +1,29 @@
-const DB = require('../services/dateBase');
 const { responseSuccess, responseFailed } = require('../services/responseBody')
-const db = new DB();
+const fs = require('fs');
+const util = require('util');
+const { getItemsByIDS, getItemsByCATEGORY } = require('../services/functions');
 
 const queryRoute = (req, res) => {
     const { ids, category } = req.query;
+    const readFile = util.promisify(fs.readFile);
 
     switch(true) {
         case !!ids:
-            db.getItemsByIDS(ids)
-                .then(product => responseSuccess(product, res))
-                .catch((err) => responseFailed(err, res));
+            readFile('./src/db/products.json')
+                .then(products => getItemsByIDS(ids, JSON.parse(products)))
+                .then(result => responseSuccess(result, res))
+                .catch(err => responseFailed(err, res));
+
             break;    
         case !!category: 
-            db.getItemsByCATEGORY(category)
-                .then(category => responseSuccess(category, res))
-                .catch((err) => responseFailed(err, res));
+            readFile('./src/db/products.json')
+                .then(categories => getItemsByCATEGORY(category, JSON.parse(categories)))
+                .then(result => responseSuccess(result, res))
+                .catch(err => responseFailed(JSON.parse(err), res));
 
             break;
         default:
-        responseFailed("ERROR", res)    
+            responseFailed("ERROR", res)    
     }
 
     

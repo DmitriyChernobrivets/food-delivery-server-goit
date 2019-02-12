@@ -7,7 +7,6 @@ const register = (req, res) => {
   const user = req.body; // {}
   const { username } = user;
 
-
   const dbFileDirectory = path.join(
     __dirname,
     "../db/users/",

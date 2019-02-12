@@ -1,14 +1,12 @@
-const DB = require('../services/dateBase');
 const { responseSuccess, responseFailed } = require('../services/responseBody')
-const db = new DB();
-
+const fs = require('fs');
+const util = require('util');
 
 const productroute = (req, res) => {
-  db.readDb()
-  .then(db => responseSuccess(db, res))
-  .catch((err) => responseFailed(err, res))
-  
-
+  const readFile = util.promisify(fs.readFile);
+  readFile('./src/db/products.json')
+    .then(db => responseSuccess(JSON.parse(db), res))
+    .catch((err) => responseFailed(JSON.parse(err), res))
 };
 
 module.exports = productroute;

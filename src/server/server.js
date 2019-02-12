@@ -20,6 +20,7 @@ const server = port => {
   app
     .use(urlencodedParser)
     .use(bodyParser.json())
+    .use((req, res, next) => console.log(req.url) || next())
     .get("/", defaultRote)
     .get("/products/:id", getByID)
     .get('/products/*+', queryRoute)
