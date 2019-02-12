@@ -1,4 +1,4 @@
-const { responseSuccess, responseFailed } = require('../services/responseBody')
+const { responseSuccess, responseFailed } = require('../../../services/responseBody')
 const fs = require('fs');
 const util = require('util');
 

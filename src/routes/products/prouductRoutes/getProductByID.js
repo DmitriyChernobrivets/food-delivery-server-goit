@@ -1,7 +1,7 @@
-const { responseSuccess, responseFailed } = require('../services/responseBody')
+const { responseSuccess, responseFailed } = require('../../../services/responseBody');
 const fs = require('fs');
 const util = require('util');
-const { getProductById } = require('../services/functions');
+const { getProductById } = require('../../../services/functions');
 
 const getByID = (req, res) => {
     const { id } = req.params;
