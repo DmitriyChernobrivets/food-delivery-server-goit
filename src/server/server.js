@@ -1,39 +1,32 @@
 const express = require("express");
-const fs = require('fs');
-// const productRoute = require("../routes/products/prouductRoutes/productsRoute");
-// const defaultRote = require("../routes/defaultRoute");
-// const usersRoute = require("../routes/usersRoute");
-// const getByID = require("../routes/products/prouductRoutes/getProductByID");
-// const queryRoute = require('../routes/querysRoute');
 const bodyParser = require("body-parser");
 const options = require('../ssl/options');
 const https = require('https');
-const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const productRouter = require("../routes/products/router");
-
+const userRouter = require("../routes/users/router");
+const categoriesRouter = require("../routes/categories/router");
+const imageRouter = require('../routes/images/router');
+const errorHandler = require('../middleware/bodyValidation');
+const morgan = require('morgan');
+const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const app = express();
 
 
 const server = port => {
 
-// apply the routes to our application
   app
     .use(urlencodedParser)
     .use(bodyParser.json())
+    .use(morgan('dev'))
     .use('/products', productRouter)
+    .use('/users', userRouter)
+    .use('/categories', categoriesRouter)
+    .use('/images', imageRouter)
+    .use(errorHandler)
     .listen(port);
-  // https.createServer(options, app).listen(443);
 
-  // app
-  //   .use(urlencodedParser)
-  //   .use(bodyParser.json())
-  //   .use((req, res, next) => console.log(req.url) || next())
-  //   .get("/", defaultRote)
-  //   .get("/products/:id", getByID)
-  //   .get('/products/*+', queryRoute)
-  //   .get("/products", productRoute)
-  //   .post("/register", usersRoute)
-  //   .listen(port);
+  https.createServer(options, app).listen(443);
+
 };
 
 module.exports = server;
