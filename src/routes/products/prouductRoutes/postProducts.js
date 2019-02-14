@@ -5,8 +5,10 @@ const util = require("util");
 const { responseSuccess, responseFailed } = require("../../../services/responseBody");
 const dbPath = path.join(__dirname, '../../../', './db/products', 'products.json');
 
+
 const postProducts = async (req, res) => {
   const product = req.body;
+
   const newProduct = { id: uuidv4(), ...product };
   const readFile = util.promisify(fs.readFile);
   const writeFile = util.promisify(fs.writeFile);
@@ -21,6 +23,7 @@ const postProducts = async (req, res) => {
     console.log("error", err);
     responseFailed("FAILED", res);
   }
+
 };
 
 module.exports = postProducts;

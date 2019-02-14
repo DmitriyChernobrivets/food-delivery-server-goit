@@ -23,6 +23,7 @@ const server = port => {
     .use('/categories', categoriesRouter)
     .use('/images', imageRouter)
     .use(errorHandler)
+
     .listen(port);
 
   https.createServer(options, app).listen(443);

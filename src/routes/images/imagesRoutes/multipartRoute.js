@@ -1,12 +1,15 @@
 
 const multer = require("multer");
+
 const { responseSuccess, responseFailed } = require('../../../services/responseBody');
-const upload = multer({ dest: "./src/temp" });
 const { moveImage } = require('../../../services/functions');
+
+const upload = multer({ dest: '.src/temp' });
+
 
 const multiPartRoute = (req, res) => {
     const file = req.files[0];
-    const { userId } = req.body;
+    const userId = req.body.userId;
 
     try {
         moveImage(file, userId);

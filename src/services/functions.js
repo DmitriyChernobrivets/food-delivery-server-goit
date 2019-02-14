@@ -16,7 +16,7 @@ const getItemsByCATEGORY = (category, AllProducts) => {
             arrayCATEGORYS.includes(category)));
 }
 
-const rename = util.promisify(fs.rename);
+// const rename = util.promisify(fs.rename);
 
 const moveImage = (obj, id) => {
     const pathUserFolder = path.join(`./src/db/users/${id}/`, obj.originalname);
