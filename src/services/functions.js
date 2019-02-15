@@ -20,7 +20,6 @@ const moveImage = (obj, id) => {
     const pathUserFolder = path.join(`./src/db/users/${id}/`, obj.originalname);
     const root = path.join(__dirname + "../../../");
     const readFromPath = path.join(root, obj.path);
-
     const readFrom = fs.createReadStream(readFromPath);
     const writingIn = fs.createWriteStream(pathUserFolder);
 
