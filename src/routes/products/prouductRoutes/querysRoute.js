@@ -2,11 +2,11 @@ const { responseSuccess, responseFailed } = require('../../../services/responseB
 const fs = require('fs');
 const util = require('util');
 const { getItemsByIDS, getItemsByCATEGORY } = require('../../../services/functions');
-var url = require('url');
-var url_parts = url.parse(request.url, true);
+
 const queryRoute = (req, res) => {
     const { ids, category } = req.query;
-    console.log(req.params)
+    console.log('xaxa')
+    console.log(req.query)
     res.send();
     // const readFile = util.promisify(fs.readFile);
 
