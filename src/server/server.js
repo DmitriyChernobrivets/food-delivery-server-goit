@@ -10,10 +10,16 @@ const errorHandler = require('../middleware/bodyValidation');
 const morgan = require('morgan');
 const urlencodedParser = bodyParser.urlencoded({ extended: true });
 const app = express();
-
+const mongoose = require('mongoose');
+const { mongoURI } = require('../mongoDB/keys');
 
 
 const server = port => {
+
+
+  mongoose.connect(mongoURI, { useNewUrlParser: true })
+    .then(() => console.log('Mongo connected'))
+    .catch(err => console.log(err));
 
   app
     .use(urlencodedParser)

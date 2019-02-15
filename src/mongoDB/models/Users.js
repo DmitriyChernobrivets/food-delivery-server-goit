@@ -13,6 +13,8 @@ const usersSchema = new Schema({
     },
     age: {
         type: Number,
+        min: 11,
+        max: 65,
         required: true
     },
     date: {

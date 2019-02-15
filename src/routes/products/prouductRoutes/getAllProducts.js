@@ -1,12 +1,10 @@
 const { responseSuccess, responseFailed } = require('../../../services/responseBody')
-const fs = require('fs');
-const util = require('util');
+const Products = require("../../../mongoDB/models/Products");
 
 const productroute = (req, res) => {
-  const readFile = util.promisify(fs.readFile);
-  readFile('./src/db/products.json')
-    .then(db => responseSuccess(JSON.parse(db), res))
-    .catch((err) => responseFailed(JSON.parse(err), res))
+  Products.find().limit(10)
+    .then(el => responseSuccess(el, "Product", res))
+    .catch(err => responseFailed(400, err.message, res));
 };
 
 module.exports = productroute;
