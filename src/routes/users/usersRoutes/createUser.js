@@ -4,10 +4,14 @@ const util = require('util');
 const uuidv4 = require("uuid/v4");
 const { responseSuccess, responseFailed } = require('../../../services/responseBody');
 const dbPath = path.join(__dirname, '../../../', './db/users', '/');
-
+const User = require('../../../mongoDB/models/Users');
 const createUser = async (req, res) => {
+
+
     const user = req.body;
     const newUser = { id: uuidv4(), ...user };
+    // User.create(user).then(el => console.log(el)).catch(err => console.log(err));
+    User.find({ username: "Dia" }).then(el => console.log(el)).catch(err => console.log(err));
 
     const mkdir = util.promisify(fs.mkdir);
     const writeFile = util.promisify(fs.writeFile);
