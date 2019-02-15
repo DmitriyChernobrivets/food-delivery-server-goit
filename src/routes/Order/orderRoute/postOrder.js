@@ -17,7 +17,6 @@ const postCategory = async (req, res) => {
     const createFolder = util.promisify(fs.mkdir);
     const writeFile = util.promisify(fs.writeFile);
 
-
     try {
         const isProductsinBase = await readFile(dbPath).then(el => findProducts(JSON.parse(el), products).length === products.length);
 
