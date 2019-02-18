@@ -22,10 +22,7 @@ const moveImage = (obj, id) => {
     const root = path.join(__dirname + "../../../");
     const readFromPath = path.join(root, obj.path);
     return rename(readFromPath, pathUserFolder)
-    // const readFrom = fs.createReadStream(readFromPath);
-    // const writingIn = fs.createWriteStream(pathUserFolder);
 
-    // readFrom.pipe(writingIn);
 }
 
 const findProducts = (Allproducts, searchedProducts) => Allproducts.filter(el => searchedProducts.includes(el.id))
