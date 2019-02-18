@@ -9,6 +9,4 @@ categoriesRouter
     .post('/', postCategory)
     .put('/:id', updateCategory);
 
-
-
 module.exports = categoriesRouter;

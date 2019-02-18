@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const usersSchema = new Schema({
     username: {
@@ -9,7 +9,12 @@ const usersSchema = new Schema({
     },
     gender: {
         type: String,
-        required: true
+        required: true,
+        lowercase: true,
+        validate: {
+            validator: (value) => /male|female|transe/.exec(value),
+            message: "Inccorect gender value"
+        }
     },
     age: {
         type: Number,
@@ -17,13 +22,23 @@ const usersSchema = new Schema({
         max: 65,
         required: true
     },
-    date: {
+    created: {
         type: Date,
         default: Date.now
     },
-    favoriteCategories: Array,
-    products: Array,
-    viewedProducts: Array
+    updated: {
+        type: Date,
+        default: Date.now
+    },
+    favoriteCategories: [{
+        type: mongoose.Schema.Types.ObjectId
+    }],
+    products: [{
+        type: mongoose.Schema.Types.ObjectId
+    }],
+    viewedProducts: [{
+        type: mongoose.Schema.Types.ObjectId
+    }]
 })
 
 module.exports = mongoose.model('User', usersSchema);

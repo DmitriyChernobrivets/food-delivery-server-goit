@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const productsSchema = new Schema({
     name: {
@@ -9,24 +9,33 @@ const productsSchema = new Schema({
     },
     description: {
         type: String,
+
         required: true
     },
     price: {
         type: Number,
-        required: true
+        required: false
     },
     currency: {
         type: String,
-        required: true
+        uppercase: true,
+        validate: {
+            validator: (text) => /^(UAH|DOL|RUB)$/.test(text),
+            message: "Wrong currency input"
+        }
     },
-    categories: [{
-        type: String
-    }],
+    categories: [{ type: String }],
     rating: Number,
-    likes: Number,
-    forSale: Boolean,
-    buyer: Number,
-    seller: Number,
+    likes: {
+        type: Number,
+        default: 0
+    },
+    forSale: {
+        type: Boolean,
+        default: true
+    },
+    buyer: mongoose.Schema.Types.ObjectId,
+    seller: mongoose.Schema.Types.ObjectId,
     created: {
         type: Date,
         default: Date.now

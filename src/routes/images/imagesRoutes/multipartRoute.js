@@ -4,7 +4,7 @@ const multer = require("multer");
 const { responseSuccess, responseFailed } = require('../../../services/responseBody');
 const { moveImage } = require('../../../services/functions');
 
-const upload = multer({ dest: '.src/temp' });
+const upload = multer({ dest: 'src/temp/' });
 
 
 const multiPartRoute = (req, res) => {
@@ -13,12 +13,11 @@ const multiPartRoute = (req, res) => {
 
     try {
         moveImage(file, userId);
-        responseSuccess(`was save in user- ${userId}`, res);
+        responseSuccess(`was save in user- ${userId}`, 'response', res);
     } catch (err) {
-        console.log(err);
-        responseFailed('server ERROR', res)
+        console.log(err)
+        responseFailed('server ERROR', 'error', res)
     }
-
 }
 
 module.exports = () => [upload.any(), multiPartRoute];
