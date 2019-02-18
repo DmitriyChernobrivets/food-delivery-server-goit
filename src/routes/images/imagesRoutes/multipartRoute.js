@@ -8,13 +8,9 @@ const multiPartRoute = (req, res) => {
     const file = req.files[0];
     const { userId } = req.body;
 
-    try {
-        moveImage(file, userId);
-        responseSuccess(`was save in user- ${userId}`, res);
-    } catch (err) {
-        console.log(err);
-        responseFailed('server ERROR', res)
-    }
+    moveImage(file, userId)
+        .then(() => responseSuccess(`was save in user- ${userId}`, res))
+        .catch(() => responseFailed('server ERROR', res));
 
 }
 
