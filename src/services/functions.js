@@ -16,20 +16,15 @@ const getItemsByCATEGORY = (category, AllProducts) => {
             arrayCATEGORYS.includes(category)));
 }
 
-// const rename = util.promisify(fs.rename);
+
 
 const moveImage = (obj, id) => {
-    console.log(id)
+    const rename = util.promisify(fs.rename);
     const pathUserFolder = path.join(`./src/db/users/${id}/`, obj.originalname);
     const root = path.join(__dirname + "../../../");
     const readFromPath = path.join(root, obj.path);
 
-    const readFrom = fs.createReadStream(readFromPath, function (err) {
-        console.log('xaxa')
-    });
-    const writingIn = fs.createWriteStream(pathUserFolder);
-
-    readFrom.pipe(writingIn);
+    return rename(readFromPath, pathUserFolder)
 
 }
 

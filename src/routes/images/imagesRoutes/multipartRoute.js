@@ -10,14 +10,10 @@ const upload = multer({ dest: 'src/temp/' });
 const multiPartRoute = (req, res) => {
     const file = req.files[0];
     const userId = req.body.userId;
-
-    try {
-        moveImage(file, userId);
-        responseSuccess(`was save in user- ${userId}`, 'response', res);
-    } catch (err) {
-        console.log(err)
-        responseFailed('server ERROR', 'error', res)
-    }
+    console.log(req.body.image)
+    moveImage(file, userId)
+        .then(() => responseSuccess(`was save in user- ${userId}`, 'response', res))
+        .catch(err => console.log(err) || responseFailed('server ERROR', 'error', res));
 }
 
 module.exports = () => [upload.any(), multiPartRoute];
