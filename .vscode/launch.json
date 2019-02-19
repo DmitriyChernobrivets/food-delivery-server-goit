@@ -1,0 +1,23 @@
+// {
+//     "version": "0.1.0",
+//     "configurations": [
+//         {
+//             "name": "Launch localhost",
+//             "type": "chrome",
+//             "request": "launch",
+//             "url": "http://localhost:3003",
+//             "webRoot": "${workspaceFolder}/src"
+//         }
+//     ]
+// }
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}\\src\\index.js"
+        }
+    ]
+}
