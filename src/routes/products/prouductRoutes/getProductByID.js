@@ -1,11 +1,9 @@
-const { responseSuccess, responseFailed } = require('../../../services/responseBody');
 const Products = require("../../../mongoDB/models/Products");
 
-
 const getByID = (req, res) => {
-    const { id } = req.params;
-    Products.findById(id)
-        .then(el => responseSuccess(el, "Product", res))
-        .catch(err => responseFailed(400, err.message, res));
-}
+  const { id } = req.params;
+  Products.findById(id)
+    .then(product => res.send({ status: "OK", product }))
+    .catch(err => res.send({ status: "Failed", Error: "Not Founded" }));
+};
 module.exports = getByID;

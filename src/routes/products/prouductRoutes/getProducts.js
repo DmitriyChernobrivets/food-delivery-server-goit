@@ -1,6 +1,6 @@
 const { responseSuccess, responseFailed } = require('../../../services/responseBody')
 const Products = require("../../../mongoDB/models/Products");
-const mongoose = require('mongoose');
+
 
 const productroute = (req, res) => {
   const { ids } = req.query;

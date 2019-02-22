@@ -1,13 +1,14 @@
-const User = require('../../../mongoDB/models/Users');
-const { responseSuccess, responseFailed } = require('../../../services/responseBody');
-
+const User = require("../../../mongoDB/models/Users");
+const { responseSuccess, responseFailed } = require("../../../services/responseBody");
 
 const getUserByID = (req, res) => {
-    const { id } = req.params;
+  const { id } = req.params;
+  if (!id) {
+    res.send({ status: "Failed", error: "Wrong incoming data" });
+  }
 
-    User.findById(id)
-        .then(el => responseSuccess(el, 'User', res))
-        .catch(err => responseFailed(404, "User Not Founded", res) || console.log(err.message))
-
-}
+  User.findById(id)
+    .then(({ username, id }) => res.send({ status: "OK", User: { username, id } }))
+    .catch(err => res.send({ status: "Failed", error: err.message }) || console.log(err.message));
+};
 module.exports = getUserByID;

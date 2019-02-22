@@ -1,14 +1,13 @@
-const { responseSuccess, responseFailed } = require('../../../services/responseBody');
+const { responseSuccess, responseFailed } = require("../../../services/responseBody");
 const Products = require("../../../mongoDB/models/Products");
 
-
 const updateProduct = (req, res) => {
-    const { id } = req.params;
-    const body = req.body;
+  const { id } = req.params;
+  const body = req.body;
 
-    Products.findOneAndUpdate(id, { $set: { ...body } }, { new: true })
-        .then(el => responseSuccess(el, "Product", res))
-        .catch(err => responseFailed(400, err.message, res));
-}
+  Products.findByIdAndUpdate(id, { $set: { ...body } })
+    .then(product => res.send({ status: "OK", product }))
+    .catch(err => res.send({ status: "Failed", error: error.message }));
+};
 
 module.exports = updateProduct;
