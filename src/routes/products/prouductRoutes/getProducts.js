@@ -1,4 +1,5 @@
 const { responseSuccess, responseFailed } = require('../../../services/responseBody')
+<<<<<<< HEAD
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
@@ -31,6 +32,31 @@ const productroute = (req, res) => {
         .catch((err) => responseFailed(JSON.parse(err), res))
   }
 
+=======
+const Products = require("../../../mongoDB/models/Products");
+
+
+const productroute = (req, res) => {
+  const { ids } = req.query;
+  switch (true) {
+
+    case !!ids:
+
+      const trimedIDS = ids.match(/\w+/g);
+      Products.find({ "_id": { $in: trimedIDS } })
+        .then(el => responseSuccess(el, "Product", res))
+        .catch(err => responseFailed(400, err.message, res))
+      break;
+    default:
+      Products.find().limit(10)
+        .then(el => responseSuccess(el, "Product", res))
+        .catch(err => responseFailed(400, err.message, res));
+      break;
+  }
+
+
+
+>>>>>>> homework-4
 };
 
 module.exports = productroute;

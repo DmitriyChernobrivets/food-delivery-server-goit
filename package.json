@@ -18,10 +18,28 @@
   },
   "homepage": "https://github.com/DmitriyChernobrivets/food-delivery-server-goit#readme",
   "dependencies": {
+<<<<<<< HEAD
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "morgan": "^1.9.1",
     "multer": "^1.4.1",
+=======
+    "bcrypt": "^3.0.4",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "express-formidable": "^1.2.0",
+    "gridfs-stream": "^1.1.1",
+    "method-override": "^3.0.0",
+    "mkcert": "^1.2.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.14",
+    "morgan": "^1.9.1",
+    "multer": "^1.4.1",
+    "multer-gridfs-storage": "^3.2.3",
+    "multiparty": "^4.2.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+>>>>>>> homework-4
     "uuid": "^3.3.2"
   },
   "devDependencies": {

@@ -1,44 +1,21 @@
-const fs = require("fs");
-const path = require("path");
-const util = require('util');
-const uuidv4 = require("uuid/v4");
-const { responseSuccess, responseFailed } = require('../../../services/responseBody');
-const dbPath = path.join(__dirname, '../../../', './db/users', '/');
+const { responseSuccess, responseFailed } = require("../../../services/responseBody");
+const User = require("../../../mongoDB/models/Users");
+const bcrypt = require("bcrypt");
 
-const createUser = async (req, res) => {
-    const user = req.body;
-    const newUser = { id: uuidv4(), ...user };
+const createUser = (req, res) => {
+  const user = req.body;
+  if (!user.password || !user.username || !user.email) {
+    res.send({ status: "Failed", error: "Bad Request" });
+  }
+  const hashedPassword = bcrypt.hashSync(user.password, bcrypt.genSaltSync(8), null);
+  const newUser = new User({ ...user, password: hashedPassword });
 
-    const mkdir = util.promisify(fs.mkdir);
-    const writeFile = util.promisify(fs.writeFile);
-
-    const directoryPath = path.join(dbPath, `${newUser.id}`);
-    const filePath = path.join(dbPath, `${newUser.id}`, `user-${newUser.id}.json`);
-
-    try {
-
-        await mkdir(directoryPath);
-        await writeFile(filePath, JSON.stringify(newUser));
-        responseSuccess(newUser, res);
-    }
-    catch (err) {
-        console.log(err);
-        responseFailed('FAiled', res)
-    }
-
-    // const readFile = util.promisify(fs.readFile);
-    // const writeFile = util.promisify(fs.writeFile);
-    // const newUser = { id: uuidv4(), ...user };
-    // try {
-    //     const read = await readFile(dbPath, "utf-8");
-    //     const newItem = JSON.parse(read).concat(newUser);
-
-    //     await writeFile(dbPath, JSON.stringify(newItem), "utf-8");
-    //     responseSuccess(newUser, res);
-    // } catch (err) {
-    //     console.log("error", err);
-    //     responseFailed("FAILED", res);
-    // }
-}
+  newUser
+    .save()
+    .then(({ username, password, id }) =>
+      res.send({ status: "OK", newUser: { username, password, id } })
+    )
+    .catch(err => res.send({ status: "Failed", error: err.message }));
+};
 
 module.exports = createUser;

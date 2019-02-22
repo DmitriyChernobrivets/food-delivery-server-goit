@@ -1,12 +1,14 @@
 
-const responseSuccess = (data, res) => {
+const responseSuccess = (data, key, res) => {
+
     res.writeHead(200, { "Content-Type": "application/json; charset=utf-8" });
-    res.write(JSON.stringify({ status: "success", "products": data }));
+    res.write(JSON.stringify({ status: "success", [key]: data }));
     res.send();
 };
-const responseFailed = (data, res) => {
+const responseFailed = (statusNumber, data, res) => {
+
     res.writeHead(400, { "Content-Type": "application/json; charset=utf-8" });
-    res.write(JSON.stringify({ status: "no matches", products: data }));
+    res.write(JSON.stringify({ status: statusNumber, "Error": data }));
     res.end();
 };
 module.exports = {
