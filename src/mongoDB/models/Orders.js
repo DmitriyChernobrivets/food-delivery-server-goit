@@ -29,10 +29,7 @@ const orderSchema = new Schema({
   deliveryAdress: String,
   itemCost: Number,
   status: {
-    type: String,
-    validate: {
-      validator: text => /inProgress|declined|finished|failed/.test(text)
-    }
+    type: String
   },
   created: {
     type: Date,

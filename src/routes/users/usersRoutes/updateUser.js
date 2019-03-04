@@ -5,7 +5,7 @@ const updateUser = (req, res) => {
   const { id } = req.params;
   const body = req.body;
 
-  User.findByIdAndUpdate(id, { $set: { ...body, updated: Date.now() } })
+  User.findOneAndUpdate(id, { $set: { ...body, updated: Date.now() } }, { new: true })
     .then(
       ({ id, username }) =>
         console.log(id) || res.send({ status: "Updated", User: { username, id } })
